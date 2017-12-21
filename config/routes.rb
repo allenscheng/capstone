@@ -1,3 +1,17 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get "/deals" => "daily_deals#index"
+  post "/deals" => "daily_deals#create"
+  get "/deals/:id" => "daily_deals#show"
+  patch "/deals/:id" => "daily_deals#update"
+  delete "/deals/:id" => "daily_deals#destroy"
+
+  get "/lists" => "wish_lists#index"
+  post "/lists" => "wish_lists#create"
+  get "/lists/:id" => "wish_lists#show"
+  patch "/lists/:id" => "wish_lists#update"
+  delete "/lists/:id" => "wish_lists#destroy"
+
+  post "/users" => "users#create"
+
+
 end
