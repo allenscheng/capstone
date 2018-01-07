@@ -6,12 +6,13 @@ class WishListsController < ApplicationController
   def create
     list = WishList.new( 
       user_id: current_user.id,
+      name: params[:name],
       product_link: params[:product_link]
       )
     if list.save  
-      render json: {status: "Successfully created a new wishlist  item!"}
+      render json: {status: "Successfully created a new wishlist item!"}
     else 
-      render json: {errors: list.errors.full_messages}, staus: :bad_request
+      render json: {errors: list.errors.full_messages}, status: :bad_request
     end
   end
   def show

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  post 'user_token' => 'user_token#create'
+  
   get "/deals" => "daily_deals#index"
   post "/deals" => "daily_deals#create"
   get "/deals/:id" => "daily_deals#show"
