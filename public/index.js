@@ -85,8 +85,8 @@ var SignupPage = {
   }
 };
 
-var DailyDealPage = {
-  template: "#dailydeal-page",
+var CreateDailyDealPage = {
+  template: "#create-dailydeal-page",
   data: function() {
     return {
       name: "",
@@ -109,7 +109,7 @@ var DailyDealPage = {
       axios
         .post("/deals", params)
         .then(function(response) {
-          router.push("/login");
+          router.push("/");
         })
         .catch(
           function(error) {
@@ -120,8 +120,8 @@ var DailyDealPage = {
   }
 };
 
-var WishListPage = {
-  template: "#wishlist-page",
+var CreateWishListPage = {
+  template: "#create-wishlist-page",
   data: function() {
     return {
       name: "",
@@ -149,13 +149,32 @@ var WishListPage = {
   }
 };
 
+var ViewWishPage = {
+  template: "#view-deals-page",
+  data: function() {
+    return {
+      wishlists: []
+    };
+  },
+  created: function() {
+    axios.get("/lists").then(
+      function(response) {
+        this.wishlists = response.data;
+      }.bind(this)
+    );
+  },
+  methods: {},
+  computed: {}
+};
+
 var router = new VueRouter({
   routes: [
     { path: "/", component: HomePage },
     { path: "/login", component: LoginPage },
     { path: "/signup", component: SignupPage },
-    { path: "/dailydeal", component: DailyDealPage },
-    { path: "/wishlist", component: WishListPage }
+    { path: "/dailydeal", component: CreateDailyDealPage },
+    { path: "/wishlist", component: CreateWishListPage },
+    { path: "/lists", component: ViewWishPage }
   ],
   scrollBehavior: function(to, from, savedPosition) {
     return { x: 0, y: 0 };
@@ -163,7 +182,7 @@ var router = new VueRouter({
 });
 
 var app = new Vue({
-  el: "#app",
+  el: "#vue-app",
   router: router,
   created: function() {
     var jwt = localStorage.getItem("jwt");

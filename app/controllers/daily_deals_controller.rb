@@ -1,10 +1,10 @@
 class DailyDealsController < ApplicationController
   def index
-    deal = DailyDeal.all.order(:id => :asc)
-    # response = Unirest.get("http://api.walmartlabs.com/v1/search?apiKey=8zc534rm7efzj5tbbxa6fxmb&query=towels")
-    # body = response.body 
-    # deal = body["items"]
-    render json: deal.as_json
+    # deal = DailyDeal.all.order(:id => :asc)
+    # render json: deal.as_json
+    response = Unirest.get("http://api.walmartlabs.com/v1/trends?format=json&apiKey=#{ENV["WALMART_API_KEY"]}")
+    result = response.body["items"]
+    render json: result.as_json
   end
   def create
     deal = DailyDeal.new(
