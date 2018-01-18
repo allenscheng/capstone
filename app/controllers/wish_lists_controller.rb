@@ -36,11 +36,17 @@ class WishListsController < ApplicationController
   def image 
     images = []
     require "google/cloud/vision"
+    require "google/cloud/storage"
     # Imports the Google Cloud client library
     # Your Google Cloud Platform project ID
     project_id = "capstone-189322"
+    key_file = "/Users/Allen/Downloads/Capstone-df5d1819a886.json"
+    storage = Google::Cloud::Storage.new project: project_id, keyfile: key_file
+    storage.buckets.each do |bucket|
+      puts bucket.name
+    end
     # Instantiates a client
-    vision = Google::Cloud::Vision.new project: project_id
+    vision = Google::Cloud::Vision.new project: project_id, keyfile: key_file
     # The name of the image file to annotate
     file_name = "/Users/Allen/Downloads/cup.jpeg"
     image_path = "/Users/Allen/Downloads/cup.jpeg"

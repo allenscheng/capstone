@@ -46,3 +46,4 @@ gem 'figaro'
 gem "unirest"
 gem "metainspector"
 gem "google-cloud-vision"
+gem "google-cloud-storage"
