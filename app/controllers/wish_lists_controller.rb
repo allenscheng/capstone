@@ -35,7 +35,7 @@ class WishListsController < ApplicationController
 
   def image 
     images = []
-    # require "google/cloud/vision"
+    require "google/cloud/vision"
     # Imports the Google Cloud client library
     # Your Google Cloud Platform project ID
     project_id = "capstone-189322"
