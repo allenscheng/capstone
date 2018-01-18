@@ -49,10 +49,15 @@
   <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.js"></script>
   <script src="index.js" defer></script>
+  <style>
+    .redSale {
+      color: red;
+    }
+  </style>
 </head>
 
 <body>
-  <div id="vue-app">
+<div id="vue-app">
 
   <div id="preloader"></div>
 
@@ -91,30 +96,42 @@
 
       <nav id="nav-menu-container">
         <ul class="nav-menu">
+
           <li class="menu-active"><a href="/#/">Home</a></li>
           <li><a href="/#/wishlist">Create a Wishlist</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#testimonials">Testimonials</a></li>
-          <li><a href="#team">Team</a></li>
-          <li class="menu-has-children"><a href="">Drop Down</a>
+          <li><a href="/#/dailydeal">Create Daily Deal</a></li>
+          <li><a href="/#/deals">View daily deal</a></li>
+          <li><a href="#/searchresult">Results</a></li>
+          <li class="menu-has-children"><a>Account</a>
+            <ul>
+              <li><a href="/#/login">Login</a></li>
+              <li><a href="/#/logout">Logout</a></li>
+              <li><a href="/#/signup">Signup</a></li>
+              <li><a href="#">Deep Drop Down 4</a></li>
+              <li><a href="#">Deep Drop Down 5</a></li>
+            </ul>
+          </li>
+          <li class="menu-has-children"><a>Drop Down</a>
             <ul>
               <li><a href="/#/lists">View Wishlist</a></li>
-              <li class="menu-has-children"><a href="#">Account</a>
-                <ul>
-                  <li><a href="/#/login">Login</a></li>
-                  <li><a href="/#/logout">Logout</a></li>
-                  <li><a href="/#/signup">Signup</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
+              <li><a href="#">Drop Down 2</a></li>
               <li><a href="#">Drop Down 3</a></li>
               <li><a href="#">Drop Down 4</a></li>
               <li><a href="#">Drop Down 5</a></li>
             </ul>
           </li>
-          <li><a href="#contact">Contact Us</a></li>
+
+
+          <li class="menu-has-children"><a>Search</a>
+            <ul>
+              <div class="form-inline my-2 my-lg-0">
+                    <input  v-model="search_term" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" v-on:click="submit()" type="submit">Search</button>
+                  </div>
+            </ul>
+          </li>
+
+
         </ul>
       </nav>
       <!-- #nav-menu-container -->
@@ -125,7 +142,7 @@
   <!--==========================
   About Section
   ============================-->
-  <section id="about">
+<!--   <section id="about">
     <div class="container wow fadeInUp">
       <div class="row">
         <div class="col-md-12">
@@ -154,12 +171,12 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!--==========================
   Services Section
   ============================-->
-  <section id="services">
+<!--   <section id="services">
     <div class="container wow fadeInUp">
       <div class="row">
         <div class="col-md-12">
@@ -202,12 +219,12 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!--==========================
   Subscrbe Section
   ============================-->
-  <section id="subscribe">
+<!--   <section id="subscribe">
     <div class="container wow fadeInUp">
       <div class="row">
         <div class="col-md-8">
@@ -219,12 +236,12 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!--==========================
   Porfolio Section
   ============================-->
-  <section id="portfolio">
+<!--   <section id="portfolio">
     <div class="container wow fadeInUp">
       <div class="row">
         <div class="col-md-12">
@@ -309,7 +326,7 @@
 
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!--==========================
   Testimonials Section
@@ -438,6 +455,7 @@
 
   
 
+  <router-view></router-view>
 
 
   <!--==========================
@@ -467,7 +485,6 @@
 
   <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
-  <router-view></router-view>
 
 </div>
 
@@ -494,7 +511,24 @@
 
 <template id="home-page">
   <div class="vue-component">
-   <div class="card" style="width: 18rem;" v-for="product in products">
+  <section id="services"><!-- needed for the animation and layout -->
+    <div class="container wow fadeInUp">
+      <div class="row">
+        <h3 class="section-title">Daily Deals</h3>
+          <div class="section-title-divider"></div>
+          <p class="section-description">Si stante, hoc natura videlicet vult, salvam esse se, quod concedimus ses haec dicturum fuisse</p>
+        </div>
+        <div class="col-md-3 service-item" v-for="product in products">
+          <img class="card-img-top" v-bind:src="product.mediumImage" alt="Card image cap">
+          <!-- <div class="service-icon"><i class="fa fa-desktop"></i></div> -->
+          <h5 class="service-title"><a href="">{{product.name}}</a></h5>
+          <p class="service-description redSale"> ${{product.salePrice}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--  <div class="card" style="width: 18rem;" v-for="product in products">
      <img class="card-img-top" v-bind:src="product.mediumImage" alt="Card image cap">
      <div class="card-body">
        <h5 class="card-title">Name: {{product.name}}</h5>
@@ -503,7 +537,7 @@
        <a href="#{product.productUrl}" class="btn btn-primary">Product URL</a>
        <a v-bind:href="product.productUrl" class="btn btn-primary">Go somewhere</a>
      </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -582,15 +616,12 @@
 </template>
 
 <template id="create-wishlist-page">
+
   <div class="container">
-    <h1>New Deal</h1>
+    <h1>New Wishlist Item</h1>
     <ul>
       <li class="text-danger" v-for="error in errors">{{ error }}</li>
     </ul>
-    <div class="form-group">
-      <label>Name:</label> 
-      <input type="text" class="form-control" v-model="name">
-    </div>
     <div class="form-group">
       <label>Product Link:</label>
       <input type="text" class="form-control" v-model="productLink">
@@ -599,15 +630,77 @@
   </div>
 </template>
 
-<template id="view-deals-page">
+<template id="view-wishlist-page">
+  <section id="portfolio"><!-- portfolio is needed to load the card animation -->
+    <div class="container wow fadeInUp">
+      <div class="row">
+        <div class="col-md-3"  v-for="wishlist in wishlists">
+          <a class="portfolio-item" style="background-image: url(img/portfolio-1.jpg);" v-bind:href="wishlist.product_link" target="_blank"> 
+            <div class="details">
+              <h4>{{wishlist.name}}</h4>
+              <p>Click me</p>    
+            </div>
+          </a>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
+<template id="view-dailydeal-page">
   <div class="container">
-  <div class="card" style="width: 18rem;" v-for="wishlist in wishlists">
+  <div class="card" style="width: 18rem;" v-for="dailydeal in dailydeals">
     <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+    <div class="row">
     <div class="card-body">
-      <h5 class="card-title">Name: {{wishlist.name}}</h5>
-      <p class="card-text">Product Link: {{wishlist.product_link}}</p>
+      <h5 class="card-title">Name: {{dailydeal.name}}</h5>
+      <p class="card-text">Product Link: {{dailydeal.product_link}}</p>
       <a href="#" class="btn btn-primary">Go somewhere</a>
     </div>
   </div>
+    </div>
+  </div>
+</template>
+
+<template id="search-page">
+  <div class="container">
+  <div class="card" style="width: 18rem;" v-for="searchresult in searchResults">
+    <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+    <div class="card-body">
+      <h5 class="card-title">Name: {{searchresult.name}}</h5>
+      <p class="card-text">Product Link: {{searchresult.product_link}}</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
+  </div>
+</template>
+
+
+<template id="create-image-page">
+
+  <div class="container">
+    <h1>New Image</h1>
+    <ul>
+      <li class="text-danger" v-for="error in errors">{{ error }}</li>
+    </ul>
+    <div class="form-group">
+      <label>Image:</label>
+      <input type="text" class="form-control" v-model="productLink">
+    </div>
+    <button class="btn btn-primary" v-on:click="submit()">Submit</button>
+  </div>
+</template>
+
+<template id="view-image-page">
+  <div class="container">
+  <div class="card" style="width: 18rem;" v-for="image in wishlists">
+    <div class="row">
+    <div class="card-body">
+      <h5 class="card-title">Name: {{image.product_link}}</h5>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
+    </div>
   </div>
 </template>

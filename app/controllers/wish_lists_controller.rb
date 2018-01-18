@@ -1,13 +1,17 @@
 class WishListsController < ApplicationController
+  require "pp"
   def index
     list = WishList.all.order(:id => :asc)
     render json: list.as_json 
   end
   def create
+    page = MetaInspector.new(params[:product_link])
+    # pp page.url
+    # pp page.images.best
     list = WishList.new( 
       user_id: current_user.id,
-      name: params[:name],
-      product_link: params[:product_link]
+      name: page.title,
+      product_link: page.url 
       )
     if list.save  
       render json: {status: "Successfully created a new wishlist item!"}
@@ -27,5 +31,33 @@ class WishListsController < ApplicationController
     list = WishList.find_by(:id, params[:id]) 
     list.destroy
     render json: {message: "Wishlist item has been removed!"}    
+  end
+
+  def image 
+    images = []
+    # require "google/cloud/vision"
+    # Imports the Google Cloud client library
+    # Your Google Cloud Platform project ID
+    project_id = "capstone-189322"
+    # Instantiates a client
+    vision = Google::Cloud::Vision.new project: project_id
+    # The name of the image file to annotate
+    file_name = "/Users/Allen/Downloads/cup.jpeg"
+    image_path = "/Users/Allen/Downloads/cup.jpeg"
+
+    # Performs label detection on the image file
+    web = vision.image(file_name).labels
+    image  = vision.image image_path
+    web = image.web
+    # web.entities.each do |entity|
+    #   puts entity.description
+    # end
+    render json: web.full_matching_images
+    # .each do |image|
+    #   images << image.url
+    # end
+    # pp images
+  # render json: images.as_json
+
   end
 end

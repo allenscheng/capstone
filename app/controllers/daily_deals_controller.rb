@@ -1,11 +1,24 @@
 class DailyDealsController < ApplicationController
+
+  def index2 
+    deal = DailyDeal.all.order(:id => :asc)
+    render json: deal.as_json 
+  end
+
   def index
-    # deal = DailyDeal.all.order(:id => :asc)
+    deal = DailyDeal.all.order(:id => :asc)
     # render json: deal.as_json
     response = Unirest.get("http://api.walmartlabs.com/v1/trends?format=json&apiKey=#{ENV["WALMART_API_KEY"]}")
     result = response.body["items"]
-    render json: result.as_json
+    render json: [result, deal].as_json
   end
+
+  def search 
+    search_term = params[:search_term]
+    response = Unirest.get("http://api.walmartlabs.com/v1/search?query=#{search_term}&format=json&apiKey=#{ENV["WALMART_API_KEY"]}")
+    render json: response.body["items"]
+  end
+
   def create
     deal = DailyDeal.new(
       user_id: current_user.id,
@@ -21,6 +34,7 @@ class DailyDealsController < ApplicationController
       render json: {status: deal.errors.full_messages}, status: :bad_request
     end
   end
+
   def update
     deal = Deal.find_by(id: params[:id])
     deal.name = params[:name] || deal.name
@@ -35,9 +49,14 @@ class DailyDealsController < ApplicationController
       render json: {errors: deal.errors.full_messages}, status: :bad_request
     end
   end
+
   def destroy 
     deal = Deal.find_by(id: params[:id])
     deal.destroy 
     render json: {message: "The deal has been removed!"}
   end
+
+
+
+
 end

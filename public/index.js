@@ -4,14 +4,17 @@ var HomePage = {
   template: "#home-page",
   data: function() {
     return {
-      message: "Welcome to Vue.js!",
+      walProducts: [],
+      userProducts: [],
       products: []
     };
   },
   created: function() {
     axios.get("/deals").then(
       function(response) {
-        this.products = response.data;
+        this.walProducts = response.data[0];
+        this.userProducts = response.data[1];
+        this.products = this.walProducts.concat(this.userProducts);
       }.bind(this)
     );
   },
@@ -124,7 +127,7 @@ var CreateWishListPage = {
   template: "#create-wishlist-page",
   data: function() {
     return {
-      name: "",
+      // name: "",
       productLink: "",
       errors: []
     };
@@ -149,8 +152,8 @@ var CreateWishListPage = {
   }
 };
 
-var ViewWishPage = {
-  template: "#view-deals-page",
+var ViewWishListPage = {
+  template: "#view-wishlist-page",
   data: function() {
     return {
       wishlists: []
@@ -167,6 +170,84 @@ var ViewWishPage = {
   computed: {}
 };
 
+var ViewDailyDealPage = {
+  template: "#view-dailydeal-page",
+  data: function() {
+    return {
+      dailydeals: []
+    };
+  },
+  created: function() {
+    axios.get("/deals2").then(
+      function(response) {
+        this.dailydeals = response.data;
+      }.bind(this)
+    );
+  },
+  methods: {},
+  computed: {}
+};
+
+var SearchPage = {
+  template: "#search-page",
+  data: function() {
+    return {
+      searchResults: this.$root.searchresults,
+      search_term: ""
+    };
+  },
+  created: function() {},
+  methods: {},
+  computed: {}
+};
+
+var ViewImagePage = {
+  template: "#view-image-page",
+  data: function() {
+    return {
+      wishlists: []
+    };
+  },
+  created: function() {
+    axios.get("/images").then(
+      function(response) {
+        this.wishlists = response.data;
+      }.bind(this)
+    );
+  },
+  methods: {},
+  computed: {}
+};
+
+// var CreateImagePage = {
+//   template: "#create-image-page",
+//   data: function() {
+//     return {
+//       // name: "",
+//       productLink: "",
+//       errors: []
+//     };
+//   },
+//   methods: {
+//     submit: function() {
+//       var params = {
+//         name: this.name,
+//         product_link: this.productLink
+//       };
+//       axios
+//         .post("/lists", params)
+//         .then(function(response) {
+//           router.push("/image");
+//         })
+//         .catch(
+//           function(error) {
+//             this.errors = error.response.data.errors;
+//           }.bind(this)
+//         );
+//     }
+//   }
+// };
+
 var router = new VueRouter({
   routes: [
     { path: "/", component: HomePage },
@@ -174,7 +255,11 @@ var router = new VueRouter({
     { path: "/signup", component: SignupPage },
     { path: "/dailydeal", component: CreateDailyDealPage },
     { path: "/wishlist", component: CreateWishListPage },
-    { path: "/lists", component: ViewWishPage }
+    { path: "/lists", component: ViewWishListPage },
+    { path: "/deals", component: ViewDailyDealPage },
+    { path: "/searchresults", component: SearchPage },
+    { path: "/image", component: ViewImagePage }
+    // { path: "/createimage", component: CreateImagePage }
   ],
   scrollBehavior: function(to, from, savedPosition) {
     return { x: 0, y: 0 };
@@ -184,10 +269,29 @@ var router = new VueRouter({
 var app = new Vue({
   el: "#vue-app",
   router: router,
+  data: function() {
+    return {
+      searchresults: [],
+      search_term: ""
+    };
+  },
   created: function() {
     var jwt = localStorage.getItem("jwt");
     if (jwt) {
       axios.defaults.headers.common["Authorization"] = jwt;
+    }
+  },
+  methods: {
+    submit: function() {
+      console.log(this.search_term);
+      axios.get("/deals_search?search_term=" + this.search_term).then(
+        function(response) {
+          this.searchresults = response.data;
+          // console.log(this.searchresults);
+          router.push("/searchresults");
+          this.search_term = "";
+        }.bind(this)
+      );
     }
   }
 });
