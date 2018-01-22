@@ -6,7 +6,8 @@ var HomePage = {
     return {
       walProducts: [],
       userProducts: [],
-      products: []
+      products: [],
+      product_link: ""
     };
   },
   created: function() {
@@ -14,11 +15,27 @@ var HomePage = {
       function(response) {
         this.walProducts = response.data[0];
         this.userProducts = response.data[1];
-        this.products = this.walProducts.concat(this.userProducts);
+        this.products = this.userProducts.concat(this.walProducts);
       }.bind(this)
     );
   },
-  methods: {},
+  methods: {
+    addWishlist: function(link) {
+      var params = {
+        product_link: link
+      };
+      axios
+        .post("/lists", params)
+        .then(function(response) {
+          router.push("/lists");
+        })
+        .catch(
+          function(error) {
+            this.errors = error.response.data.errors;
+          }.bind(this)
+        );
+    }
+  },
   computed: {}
 };
 
@@ -88,8 +105,43 @@ var SignupPage = {
   }
 };
 
-var CreateDailyDealPage = {
-  template: "#create-dailydeal-page",
+// var CreateDailyDealPage = {
+//   template: "#create-dailydeal-page",
+//   data: function() {
+//     return {
+//       name: "",
+//       price: "",
+//       color: "",
+//       description: "",
+//       productLink: "",
+//       errors: []
+//     };
+//   },
+//   methods: {
+//     submit: function() {
+//       var params = {
+//         name: this.name,
+//         msrp: this.price,
+//         color: this.color,
+//         description: this.description,
+//         product_link: this.productLink
+//       };
+//       axios
+//         .post("/deals", params)
+//         .then(function(response) {
+//           router.push("/");
+//         })
+//         .catch(
+//           function(error) {
+//             this.errors = error.response.data.errors;
+//           }.bind(this)
+//         );
+//     }
+//   }
+// };
+
+var CreateDailyDealPageWithURL = {
+  template: "#create-dailydealurl-page",
   data: function() {
     return {
       name: "",
@@ -104,13 +156,13 @@ var CreateDailyDealPage = {
     submit: function() {
       var params = {
         name: this.name,
-        price: this.price,
+        msrp: this.price,
         color: this.color,
         description: this.description,
         product_link: this.productLink
       };
       axios
-        .post("/deals", params)
+        .post("/dealsurl", params)
         .then(function(response) {
           router.push("/");
         })
@@ -141,7 +193,7 @@ var CreateWishListPage = {
       axios
         .post("/lists", params)
         .then(function(response) {
-          router.push("/");
+          router.push("/lists");
         })
         .catch(
           function(error) {
@@ -189,7 +241,7 @@ var ViewDailyDealPage = {
 };
 
 var SearchPage = {
-  template: "#search-page",
+  template: "#search-results-page",
   data: function() {
     return {
       searchResults: this.$root.searchresults,
@@ -201,8 +253,35 @@ var SearchPage = {
   computed: {}
 };
 
-var ViewImagePage = {
-  template: "#view-image-page",
+var SubmitImagePage = {
+  template: "#submit-image-page",
+  data: function() {
+    return {
+      productLink: "",
+      errors: []
+    };
+  },
+  methods: {
+    submit: function() {
+      var params = {
+        product_link: this.productLink
+      };
+      axios
+        .post("/images", params)
+        .then(function(response) {
+          router.push("/imageResults");
+        })
+        .catch(
+          function(error) {
+            this.errors = error.response.data.errors;
+          }.bind(this)
+        );
+    }
+  }
+};
+
+var ImageResultPage = {
+  template: "#image-result-page",
   data: function() {
     return {
       wishlists: []
@@ -219,47 +298,19 @@ var ViewImagePage = {
   computed: {}
 };
 
-// var CreateImagePage = {
-//   template: "#create-image-page",
-//   data: function() {
-//     return {
-//       // name: "",
-//       productLink: "",
-//       errors: []
-//     };
-//   },
-//   methods: {
-//     submit: function() {
-//       var params = {
-//         name: this.name,
-//         product_link: this.productLink
-//       };
-//       axios
-//         .post("/lists", params)
-//         .then(function(response) {
-//           router.push("/image");
-//         })
-//         .catch(
-//           function(error) {
-//             this.errors = error.response.data.errors;
-//           }.bind(this)
-//         );
-//     }
-//   }
-// };
-
 var router = new VueRouter({
   routes: [
     { path: "/", component: HomePage },
     { path: "/login", component: LoginPage },
     { path: "/signup", component: SignupPage },
-    { path: "/dailydeal", component: CreateDailyDealPage },
+    // { path: "/dailydeal", component: CreateDailyDealPage },
+    { path: "/dailydealurl", component: CreateDailyDealPageWithURL },
     { path: "/wishlist", component: CreateWishListPage },
     { path: "/lists", component: ViewWishListPage },
     { path: "/deals", component: ViewDailyDealPage },
     { path: "/searchresults", component: SearchPage },
-    { path: "/image", component: ViewImagePage }
-    // { path: "/createimage", component: CreateImagePage }
+    { path: "/submitimage", component: SubmitImagePage },
+    { path: "/imageResult", component: ImageResultPage }
   ],
   scrollBehavior: function(to, from, savedPosition) {
     return { x: 0, y: 0 };
@@ -283,7 +334,7 @@ var app = new Vue({
   },
   methods: {
     submit: function() {
-      console.log(this.search_term);
+      // console.log(this.search_term);
       axios.get("/deals_search?search_term=" + this.search_term).then(
         function(response) {
           this.searchresults = response.data;

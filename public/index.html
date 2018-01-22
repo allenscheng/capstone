@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Imperial Boootstrap Template</title>
+  <title>Snapit</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
@@ -49,6 +49,7 @@
   <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.js"></script>
   <script src="index.js" defer></script>
+  <!-- <script src="./path/to/dropzone.js"></script> -->
   <style>
     .redSale {
       color: red;
@@ -72,10 +73,10 @@
           <img class="" src="img/logo.png" alt="Imperial">
         </div>
 
-        <h1>Welcome to Imperial studios</h1>
-        <h2>We create <span class="rotating">beautiful graphic, functional websites, working mobile apps</span></h2>
+        <!-- <h1>Welcome to Snap it</h1> -->
+        <h1>We <span class="rotating">show trending deals, render photos, working mobile apps</span></h1>
         <div class="actions">
-          <a href="#about" class="btn-get-started">Get Strated</a>
+          <a href="#about" class="btn-get-started">Get Started</a>
           <a href="#services" class="btn-services">Our Services</a>
         </div>
       </div>
@@ -91,7 +92,7 @@
       <div id="logo" class="pull-left">
         <a href="#hero"><img src="img/logo.png" alt="" title="" /></img></a>
         <!-- Uncomment below if you prefer to use a text image -->
-        <!--<h1><a href="#hero">Header 1</a></h1>-->
+        <!-- <h1><a href="#hero">Header 1</a></h1> -->
       </div>
 
       <nav id="nav-menu-container">
@@ -99,9 +100,10 @@
 
           <li class="menu-active"><a href="/#/">Home</a></li>
           <li><a href="/#/wishlist">Create a Wishlist</a></li>
-          <li><a href="/#/dailydeal">Create Daily Deal</a></li>
-          <li><a href="/#/deals">View daily deal</a></li>
-          <li><a href="#/searchresult">Results</a></li>
+          <li><a href="/#/dailydealurl">Create Daily Deal</a></li>
+          <li><a href="/#/deals">View Daily Deal</a></li>
+          <li><a href="/#/submitimage">Upload Photo</a></li>
+          <li><a href="/#/lists">View Wishlist</a></li>
           <li class="menu-has-children"><a>Account</a>
             <ul>
               <li><a href="/#/login">Login</a></li>
@@ -111,15 +113,7 @@
               <li><a href="#">Deep Drop Down 5</a></li>
             </ul>
           </li>
-          <li class="menu-has-children"><a>Drop Down</a>
-            <ul>
-              <li><a href="/#/lists">View Wishlist</a></li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-              <li><a href="#">Drop Down 5</a></li>
-            </ul>
-          </li>
+          
 
 
           <li class="menu-has-children"><a>Search</a>
@@ -516,28 +510,24 @@
       <div class="row">
         <h3 class="section-title">Daily Deals</h3>
           <div class="section-title-divider"></div>
-          <p class="section-description">Si stante, hoc natura videlicet vult, salvam esse se, quod concedimus ses haec dicturum fuisse</p>
+          <p class="section-description">Trending deals posted by other users</p>
         </div>
         <div class="col-md-3 service-item" v-for="product in products">
-          <img class="card-img-top" v-bind:src="product.mediumImage" alt="Card image cap">
+          <img class="card-img-top" v-bind:src="product.image" v-if="product.status_check === false" alt="Card image cap">
+          <img class="card-img-top" v-bind:src="product.mediumImage" v-else alt="Card image cap">
           <!-- <div class="service-icon"><i class="fa fa-desktop"></i></div> -->
           <h5 class="service-title"><a href="">{{product.name}}</a></h5>
-          <p class="service-description redSale"> ${{product.salePrice}}</p>
+          <p class="service-description">Price: ${{product.msrp}}</p>
+          <p class="service-description redSale">Sale Price: ${{product.salePrice}}</p>
+          <a class="btn btn-primary" v-bind:href="product.product_link" v-if="product.status_check === false" target="_blank">View Item</a>
+          <a class="btn btn-primary" v-bind:href="product.productUrl" v-else target="_blank">View Item</a>
+
+          <a class="btn btn-primary" v-if="product.status_check === false" v-on:click="addWishlist(product.product_link)">Add to wishlist</a>
+          <a class="btn btn-primary" v-else v-on:click="addWishlist(product.productUrl)">Add to wishlist</a>
         </div>
       </div>
     </div>
   </section>
-
-  <!--  <div class="card" style="width: 18rem;" v-for="product in products">
-     <img class="card-img-top" v-bind:src="product.mediumImage" alt="Card image cap">
-     <div class="card-body">
-       <h5 class="card-title">Name: {{product.name}}</h5>
-       <p class="card-text">Product MSRP: ${{product.msrp}}</p>
-       <p class="card-text redSale">Product Sale Price: ${{product.salePrice}}</p>
-       <a href="#{product.productUrl}" class="btn btn-primary">Product URL</a>
-       <a v-bind:href="product.productUrl" class="btn btn-primary">Go somewhere</a>
-     </div>
-    </div> -->
   </div>
 </template>
 
@@ -615,6 +605,36 @@
   </div>
 </template>
 
+<template id="create-dailydealurl-page">
+  <div class="container">
+    <h1>New Deal</h1>
+    <ul>
+      <li class="text-danger" v-for="error in errors">{{ error }}</li>
+    </ul>
+    <div class="form-group">
+      <label>Name:</label> 
+      <input type="text" class="form-control" v-model="name">
+    </div>
+    <div class="form-group">
+      <label>Price:</label> 
+      <input type="text" class="form-control" v-model="price">
+    </div>
+    <div class="form-group">
+      <label>Color:</label>
+      <input type="text" class="form-control" v-model="color">
+    </div>
+    <div class="form-group">
+      <label>Description:</label>
+      <input type="text" class="form-control" v-model="description">
+    </div>
+    <div class="form-group">
+      <label>Product Link:</label>
+      <input type="text" class="form-control" v-model="productLink">
+    </div>
+    <button class="btn btn-primary" v-on:click="submit()">Submit</button>
+  </div>
+</template>
+
 <template id="create-wishlist-page">
 
   <div class="container">
@@ -634,6 +654,9 @@
   <section id="portfolio"><!-- portfolio is needed to load the card animation -->
     <div class="container wow fadeInUp">
       <div class="row">
+        <h3 class="section-title">Wishlist</h3>
+          <div class="section-title-divider"></div>
+          <p class="section-description">Your current wishlist</p>
         <div class="col-md-3"  v-for="wishlist in wishlists">
           <a class="portfolio-item" style="background-image: url(img/portfolio-1.jpg);" v-bind:href="wishlist.product_link" target="_blank"> 
             <div class="details">
@@ -650,55 +673,67 @@
 
 <template id="view-dailydeal-page">
   <div class="container">
-  <div class="card" style="width: 18rem;" v-for="dailydeal in dailydeals">
-    <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-    <div class="row">
-    <div class="card-body">
-      <h5 class="card-title">Name: {{dailydeal.name}}</h5>
-      <p class="card-text">Product Link: {{dailydeal.product_link}}</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-  </div>
-    </div>
+      <section id="portfolio"><!-- portfolio is needed to load the card animation -->
+        <div class="container wow fadeInUp">
+          <div class="row">
+            <h3 class="section-title">Daily Deals</h3>
+              <div class="section-title-divider"></div>
+              <p class="section-description">Daily Deals you've posted</p>
+            <div class="col-md-3"  v-for="dailydeal in dailydeals">
+              <a class="portfolio-item" style="background-image: url(img/portfolio-1.jpg);" v-bind:href="dailydeal.product_link" target="_blank"> 
+                <div class="details">
+                  <h4>{{dailydeal.name}}</h4>
+                  <p>Click me</p>    
+                </div>
+              </a>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
   </div>
 </template>
 
-<template id="search-page">
+<template id="search-results-page">
   <div class="container">
   <div class="card" style="width: 18rem;" v-for="searchresult in searchResults">
-    <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+  <div class="row">
+    <img class="card-img-top" v-bind:src="searchresult.mediumImage" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title">Name: {{searchresult.name}}</h5>
-      <p class="card-text">Product Link: {{searchresult.product_link}}</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+      <p class="card-text">Price: ${{searchresult.msrp}}</p>
+      <p class="card-text" redSale>Sale Price: ${{searchresult.salePrice}}</p>
+
+      <a v-bind:href="searchresult.productUrl" class="btn btn-primary" target="_blank">Go somewhere</a>
     </div>
+  </div>
   </div>
   </div>
 </template>
 
-
-<template id="create-image-page">
-
+<template id="submit-image-page">
   <div class="container">
-    <h1>New Image</h1>
+    <h3 class="section-title">Locate product</h3>
+      <div class="section-title-divider"></div>
+      <p class="section-description">Upload image to find your desired product</p>
     <ul>
       <li class="text-danger" v-for="error in errors">{{ error }}</li>
     </ul>
     <div class="form-group">
       <label>Image:</label>
-      <input type="text" class="form-control" v-model="productLink">
+      <input type="file" accept="image/*;capture=camera" v-model="productLink">
     </div>
-    <button class="btn btn-primary" v-on:click="submit()">Submit</button>
+    <a href="/#/imageResult" class="btn btn-primary">Submit</a>
   </div>
 </template>
 
-<template id="view-image-page">
+<template id="image-result-page">
   <div class="container">
   <div class="card" style="width: 18rem;" v-for="image in wishlists">
-    <div class="row">
     <div class="card-body">
-      <h5 class="card-title">Name: {{image.product_link}}</h5>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+      <h5 class="card-title">Results </h5>
+    <div class="row">
+      <a v-bind:href="image" class="btn btn-primary" target="_blank">Go somewhere</a>
     </div>
   </div>
     </div>
