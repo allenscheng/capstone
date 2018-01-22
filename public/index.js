@@ -284,13 +284,13 @@ var ImageResultPage = {
   template: "#image-result-page",
   data: function() {
     return {
-      wishlists: []
+      results: []
     };
   },
   created: function() {
     axios.get("/images").then(
       function(response) {
-        this.wishlists = response.data;
+        this.results = response.data;
       }.bind(this)
     );
   },

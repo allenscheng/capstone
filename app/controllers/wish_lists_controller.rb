@@ -53,8 +53,8 @@ class WishListsController < ApplicationController
     vision = Google::Cloud::Vision.new project: project_id, keyfile: key_file
     # The name of the image file to annotate
     # file_name = "/Users/Allen/Downloads/cup.jpeg"
-    image_path = params[:product_link]
-    # image_path = "/Users/Allen/Downloads/cup.jpeg"
+    # image_path = params[:product_link]
+    image_path = "/Users/Allen/Downloads/cup.jpeg"
     image  = vision.image image_path
     web = image.web
     new_array = []

@@ -213,8 +213,8 @@
         </div>
       </div>
     </div>
-  </section> -->
-
+  </section>
+ -->
   <!--==========================
   Subscrbe Section
   ============================-->
@@ -728,14 +728,16 @@
 </template>
 
 <template id="image-result-page">
-  <div class="container">
-  <div class="card" style="width: 18rem;" v-for="image in wishlists">
-    <div class="card-body">
-      <h5 class="card-title">Results </h5>
+  <section id="services">
+  <div class="container wow fadeInUp">
+        <h4 class="service-title"><a href="">Results from image render</a></h4>
+
     <div class="row">
-      <a v-bind:href="image" class="btn btn-primary" target="_blank">Go somewhere</a>
-    </div>
+      <div class="col-md-4 service-item" v-for="link in results">
+        <a v-bind:href="link" class="service-icon" target="_blank"><i class="fa fa-paper-plane"></i></a>
+        <p class="service-description">Click icon to visit website</p>
+      </div>
   </div>
-    </div>
-  </div>
+</div>
+</section>
 </template>
