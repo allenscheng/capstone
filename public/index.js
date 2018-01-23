@@ -257,25 +257,40 @@ var SubmitImagePage = {
   template: "#submit-image-page",
   data: function() {
     return {
-      productLink: "",
-      errors: []
+      errors: [],
+      urls: []
     };
   },
   methods: {
-    submit: function() {
-      var params = {
-        product_link: this.productLink
-      };
-      axios
-        .post("/images", params)
-        .then(function(response) {
-          router.push("/imageResults");
-        })
-        .catch(
-          function(error) {
-            this.errors = error.response.data.errors;
+    uploadFile: function(event) {
+      if (event.target.files.length > 0) {
+        var formData = new FormData();
+        formData.append("image", event.target.files[0]);
+
+        axios.post("/images", formData).then(
+          function(response) {
+            this.urls = response.data;
+            console.log(this.urls);
+            event.target.value = "";
           }.bind(this)
         );
+      }
+
+      // submit: function() {
+      //   var params = {
+      //     product_link: this.productLink
+      //   };
+      //   axios
+      //     .post("/images", params)
+      //     .then(function(response) {
+      //       router.push("/imageResults");
+      //     })
+      //     .catch(
+      //       function(error) {
+      //         this.errors = error.response.data.errors;
+      //       }.bind(this)
+      //     );
+      // }
     }
   }
 };
@@ -284,13 +299,13 @@ var ImageResultPage = {
   template: "#image-result-page",
   data: function() {
     return {
-      results: []
+      urls: []
     };
   },
   created: function() {
     axios.get("/images").then(
       function(response) {
-        this.results = response.data;
+        this.urls = response.data;
       }.bind(this)
     );
   },

@@ -11,9 +11,11 @@ Rails.application.routes.draw do
   delete "/deals/:id" => "daily_deals#destroy"
   post "/dealsurl" => "daily_deals#create_url"
 
-  get "/lists" => "wish_lists#index"
   get "/images" => "wish_lists#image"
+  post "/images" => "wish_lists#image"
 
+
+  get "/lists" => "wish_lists#index"
   post "/lists" => "wish_lists#create"
   get "/lists/:id" => "wish_lists#show"
   patch "/lists/:id" => "wish_lists#update"

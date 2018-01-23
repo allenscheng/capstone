@@ -53,21 +53,27 @@ class WishListsController < ApplicationController
     vision = Google::Cloud::Vision.new project: project_id, keyfile: key_file
     # The name of the image file to annotate
     # file_name = "/Users/Allen/Downloads/cup.jpeg"
-    # image_path = params[:product_link]
-    image_path = "/Users/Allen/Downloads/cup.jpeg"
+    # image_path = "/Users/Allen/Downloads/cup.jpeg"
+    image_path = params[:image]
     image  = vision.image image_path
     web = image.web
-    new_array = []
+
+    web_links = []
     index = 0
     web_length = web.pages_with_matching_images.length 
     web_length.times do
-      new_array << web.pages_with_matching_images[index].grpc['url']
+      web_links << web.pages_with_matching_images[index].grpc['url']
       index += 1 
     end
 
-    render json: new_array
-    # puts web.methods
+    # pp web.full_matching_images
+    # p "__________________-_______"
+    # pp web.partial_matching_images
 
+
+    render json: web_links
+
+    # puts web.methods
     # Performs label detection on the image file
     # web = vision.image(file_name).labels
   end
