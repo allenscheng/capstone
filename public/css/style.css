@@ -14,11 +14,13 @@ body {
 }
 
 a {
-  color: #03C4EB;
+  color: #03c4eb;
   transition: 0.5s;
 }
 
-a:hover, a:active, a:focus {
+a:hover,
+a:active,
+a:focus {
   color: #03c5ec;
   outline: none;
   text-decoration: none;
@@ -29,7 +31,12 @@ p {
   margin: 0 0 30px 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: "Raleway", sans-serif;
   font-weight: 400;
   margin: 0 0 20px 0;
@@ -75,7 +82,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .back-to-top:hover {
-  background: #03C4EB;
+  background: #03c4eb;
   color: #fff;
 }
 
@@ -156,8 +163,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #hero .btn-get-started {
-  background: #03C4EB;
-  border: 2px solid #03C4EB;
+  background: #03c4eb;
+  border: 2px solid #03c4eb;
   color: #fff;
 }
 
@@ -173,8 +180,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #hero .btn-services:hover {
-  background: #03C4EB;
-  border: 2px solid #03C4EB;
+  background: #03c4eb;
+  border: 2px solid #03c4eb;
 }
 
 /*--------------------------------------------------------------
@@ -201,7 +208,8 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
 }
 
-#header #logo h1 a, #header #logo h1 a:hover {
+#header #logo h1 a,
+#header #logo h1 a:hover {
   color: #fff;
 }
 
@@ -231,7 +239,8 @@ h1, h2, h3, h4, h5, h6 {
 # Navigation Menu
 --------------------------------------------------------------*/
 /* Nav Menu Essentials */
-.nav-menu, .nav-menu * {
+.nav-menu,
+.nav-menu * {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -304,14 +313,16 @@ h1, h2, h3, h4, h5, h6 {
   text-decoration: none;
   display: inline-block;
   color: #fff;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   font-weight: 300;
   font-size: 14px;
   outline: none;
 }
 
-.nav-menu a:hover, .nav-menu li:hover > a, .nav-menu .menu-active > a {
-  color: #03C4EB;
+.nav-menu a:hover,
+.nav-menu li:hover > a,
+.nav-menu .menu-active > a {
+  color: #03c4eb;
 }
 
 .nav-menu ul {
@@ -419,11 +430,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #mobile-nav ul .menu-has-children i.fa-chevron-up {
-  color: #03C4EB;
+  color: #03c4eb;
 }
 
 #mobile-nav ul .menu-item-active {
-  color: #03C4EB;
+  color: #03c4eb;
 }
 
 #mobile-body-overly {
@@ -471,7 +482,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 .section-title-divider {
   width: 50px;
   height: 3px;
-  background: #03C4EB;
+  background: #03c4eb;
   margin: 0 auto;
   margin-bottom: 20px;
 }
@@ -508,7 +519,11 @@ body.mobile-nav-active #mobile-nav-toggle {
 /* Services Section
 --------------------------------*/
 #services {
-  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url("../img/services-bg.jpg") fixed center center;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0.3)
+    ),
+    url("../img/services-bg.jpg") fixed center center;
   background-size: cover;
   padding: 80px 0 60px 0;
 }
@@ -519,11 +534,11 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #services .service-icon {
   float: left;
-  background: #03C4EB;
+  background: #03c4eb;
   padding: 16px;
   border-radius: 50%;
   transition: 0.5s;
-  border: 1px solid #03C4EB;
+  border: 1px solid #03c4eb;
 }
 
 #services .service-icon i {
@@ -536,7 +551,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #services .service-item:hover .service-icon i {
-  color: #03C4EB;
+  color: #03c4eb;
 }
 
 #services .service-title {
@@ -558,7 +573,8 @@ body.mobile-nav-active #mobile-nav-toggle {
 /* Subscribe Section
 --------------------------------*/
 #subscribe {
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../img/subscribe-bg.jpg) fixed center center;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(../img/subscribe-bg.jpg) fixed center center;
   background-size: cover;
   padding: 80px 0;
 }
@@ -594,8 +610,8 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #subscribe .subscribe-btn:hover {
-  background: #03C4EB;
-  border: 2px solid #03C4EB;
+  background: #03c4eb;
+  border: 2px solid #03c4eb;
 }
 
 /* Portfolio Section
@@ -689,7 +705,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #testimonials .profile h4 {
   font-weight: 700;
-  color: #03C4EB;
+  color: #03c4eb;
   margin-bottom: 5px;
 }
 
@@ -764,7 +780,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #team .member .social a:hover {
-  color: #03C4EB;
+  color: #03c4eb;
 }
 
 #team .member .social i {
@@ -785,7 +801,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #contact .info i {
   font-size: 32px;
-  color: #03C4EB;
+  color: #03c4eb;
   float: left;
 }
 
@@ -795,8 +811,8 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #contact .form #sendmessage {
-  color: #03C4EB;
-  border: 1px solid #03C4EB;
+  color: #03c4eb;
+  border: 1px solid #03c4eb;
   display: none;
   text-align: center;
   padding: 15px;
@@ -814,7 +830,9 @@ body.mobile-nav-active #mobile-nav-toggle {
   margin-bottom: 15px;
 }
 
-#contact .form #sendmessage.show, #contact .form #errormessage.show, #contact .form .show {
+#contact .form #sendmessage.show,
+#contact .form #errormessage.show,
+#contact .form .show {
   display: block;
 }
 
@@ -826,13 +844,14 @@ body.mobile-nav-active #mobile-nav-toggle {
   font-size: 13px;
 }
 
-#contact .form input, #contact .form textarea {
+#contact .form input,
+#contact .form textarea {
   border-radius: 0;
   box-shadow: none;
 }
 
 #contact .form button[type="submit"] {
-  background: #03C4EB;
+  background: #03c4eb;
   border: 0;
   padding: 10px 24px;
   color: #fff;

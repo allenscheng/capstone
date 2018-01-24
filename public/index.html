@@ -54,6 +54,12 @@
     .redSale {
       color: red;
     }
+    p {
+      width: 20rem;
+           white-space: nowrap;
+           overflow: hidden;
+           text-overflow: ellipsis;
+    }
   </style>
 </head>
 
@@ -74,7 +80,7 @@
         </div>
 
         <!-- <h1>Welcome to Snap it</h1> -->
-        <h1><span class="rotating">We show trending deals, Find product with an image, Post deals you find</span></h1>
+        <h1><span class="rotating">Show trending deals, Find product with an image, Post deals you find</span></h1>
         <div class="actions">
           <a href="#about" class="btn-get-started">Get Started</a>
           <a href="#services" class="btn-services">Our Services</a>
@@ -504,27 +510,31 @@
     <div class="container wow fadeInUp">
         <h3 class="section-title">Daily Deals</h3>
           <div class="section-title-divider"></div>
-          <p class="section-description">Trending deals posted by other users</p>
+          <h4 class="section-description" style="color:black;">Trending deals posted by other users</h4>
       <div class="row">
-        
-
-
-
-        <div class="col-md-3 service-item" v-for="product in products">
-          <img class="card-img-top" v-bind:src="product.image" v-if="product.status_check === false" alt="Card image cap">
-          <img class="card-img-top" v-bind:src="product.mediumImage" v-else alt="Card image cap">
-          <h4>{{product.name}}</h4>
-          <p class="">Price: ${{product.msrp}}</p>
-          <p class="redSale">Sale Price: ${{product.salePrice}}</p>
+        <div class="col-sm-4" v-for="product in products">
+        <div class="card" style="width: 20rem; height: 45rem" >
+          <img class="card-img-top" v-bind:src="product.image" v-if="product.status_check === false" alt="Card image cap"  height="200" width="200">
+          <img class="card-img-top" v-bind:src="product.mediumImage" v-else alt="Card image cap"  height="200" width="200">
+          <ul class="list-group list-group-flush">
+            <p class="list-group-item" style="color:black;">{{product.name}}</p>
+            <li class="list-group-item">Price: ${{product.msrp}}</li>
+            <li class="list-group-item redSale">Sale Price: ${{product.salePrice}}</li>
+          </ul>
           <a class="btn btn-primary" v-bind:href="product.product_link" v-if="product.status_check === false" target="_blank">View Item</a>
           <a class="btn btn-primary" v-bind:href="product.productUrl" v-else target="_blank">View Item</a>
 
           <a class="btn btn-primary" v-if="product.status_check === false" v-on:click="addWishlist(product.product_link)">Add to wishlist</a>
           <a class="btn btn-primary" v-else v-on:click="addWishlist(product.productUrl)">Add to wishlist</a>
         </div>
-        </div>
       </div>
+        </div>
+        <div>
+          
+
+        </div>
     </div>
+
   </section>
   </div>
 </template>
@@ -646,12 +656,12 @@
       <div class="row">
         <h3 class="section-title">Wishlist</h3>
           <div class="section-title-divider"></div>
-          <p class="section-description">Your current wishlist</p>
+          <h4 class="section-description">Your current wishlist</h4>
         <div class="col-md-3"  v-for="wishlist in wishlists">
-          <a class="portfolio-item" style="background-image: url(img/portfolio-1.jpg);" v-bind:href="wishlist.product_link" target="_blank"> 
+          <a class="portfolio-item" v-bind:style="'background-image: url(' + wishlist.image + ');'">
             <div class="details">
               <h4>{{wishlist.name}}</h4>
-              <p>Click me</p>    
+              <p>View Product</p>    
             </div>
           </a>
           </button>
@@ -668,12 +678,12 @@
           <div class="row">
             <h3 class="section-title">Daily Deals</h3>
               <div class="section-title-divider"></div>
-              <p class="section-description">Daily Deals you've posted</p>
+              <h4 class="section-description">Daily Deals you've posted</h4>
             <div class="col-md-3"  v-for="dailydeal in dailydeals">
-              <a class="portfolio-item" style="background-image: url(img/portfolio-1.jpg);" v-bind:href="dailydeal.product_link" target="_blank"> 
+              <a class="portfolio-item" v-bind:style="'background-image: url(' + dailydeal.image + ');'"> 
                 <div class="details">
                   <h4>{{dailydeal.name}}</h4>
-                  <p>Click me</p>    
+                  <p>View Product</p>    
                 </div>
               </a>
               </button>
@@ -705,7 +715,7 @@
   <div class="container">
     <h3 class="section-title">Locate product</h3>
       <div class="section-title-divider"></div>
-      <p class="section-description">Upload image to find your desired product</p>
+      <h4 class="section-description">Upload image to find your desired product</h4>
     <ul>
       <li class="text-danger" v-for="error in errors">{{ error }}</li>
     </ul>
@@ -715,7 +725,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-4 service-item" v-on:change="urls" v-for="url in urls">
+      <div class="col-md-4 service-item" v-for="url in urls">
         <a v-bind:href="url" class="service-icon" target="_blank"><i class="fa fa-paper-plane"></i></a>
         <p class="service-description">Click icon to visit website</p>
       </div>
