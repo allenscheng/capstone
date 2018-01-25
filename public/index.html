@@ -60,6 +60,15 @@
            overflow: hidden;
            text-overflow: ellipsis;
     }
+
+    .text-outline {
+        color: white;
+        text-shadow:#000 0px 0px 6px,   #000 0px 0px 6px,   #000 0px 0px 6px;
+    }
+    .text-box {
+        width: 80%;
+        border-radius: 5px;
+    }
   </style>
 </head>
 
@@ -106,10 +115,10 @@
 
           <li class="menu-active"><a href="/#/">Home</a></li>
           <li><a href="/#/wishlist">Create a Wishlist</a></li>
+          <li><a href="/#/lists">View Wishlist</a></li>
           <li><a href="/#/dailydealurl">Create Daily Deal</a></li>
           <li><a href="/#/deals">View Daily Deal</a></li>
           <li><a href="/#/submitimage">Upload Photo</a></li>
-          <li><a href="/#/lists">View Wishlist</a></li>
           <li class="menu-has-children"><a>Account</a>
             <ul>
               <li><a href="/#/login">Login</a></li>
@@ -506,11 +515,11 @@
 
 <template id="home-page">
   <div class="vue-component">
-  <section id="services"><!-- needed for the animation and layout -->
+  <section id="subscribe"><!-- needed for the animation and layout -->
     <div class="container wow fadeInUp">
-        <h3 class="section-title">Daily Deals</h3>
-          <div class="section-title-divider"></div>
-          <h4 class="section-description" style="color:black;">Trending deals posted by other users</h4>
+        <h3 class="section-title text-outline">Daily Deals</h3>
+          <div class="section-title-divider text-outline"></div>
+          <h3 class="section-description text-outline" style="color:white;">Trending deals posted by other users</h3>
       <div class="row">
         <div class="col-sm-4" v-for="product in products">
         <div class="card" style="width: 20rem; height: 45rem" >
@@ -524,10 +533,10 @@
           <a class="btn btn-primary" v-bind:href="product.product_link" v-if="product.status_check === false" target="_blank">View Item</a>
           <a class="btn btn-primary" v-bind:href="product.productUrl" v-else target="_blank">View Item</a>
 
-          <a class="btn btn-primary" v-if="product.status_check === false" v-on:click="addWishlist(product.product_link)">Add to wishlist</a>
-          <a class="btn btn-primary" v-else v-on:click="addWishlist(product.productUrl)">Add to wishlist</a>
+          <a class="btn btn-primary" v-if="product.status_check === false" v-on:click="addWishlist(product.product_link)" data-toggle="modal" data-target="#myModal">Add to wishlist</a>
+          <a class="btn btn-primary" v-else v-on:click="addWishlist(product.productUrl)" data-toggle="modal" data-target="#myModal">Add to wishlist</a>
         </div>
-      </div>
+        </div>
         </div>
         <div>
           
@@ -536,24 +545,51 @@
     </div>
 
   </section>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Add to wishlist</h4>
+        </div>
+        <div class="modal-body">
+          <p>Analyzing link...</p>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
   </div>
 </template>
 
 <template id="login-page">
   <div class="container">
-    <h1>Login</h1>
-    <ul>
-      <li class="text-danger" v-for="error in errors">{{ error }}</li>
-    </ul>
-    <div class="form-group">
-      <label>Email:</label>
-      <input type="email" class="form-control" v-model="email">
+    <section id="subscribe">
+    <div class="container wow fadeInUp">
+        <h3 class="section-title text-outline">Login</h3>
+          <div class="section-title-divider text-outline"></div>
+          <!-- <h3 class="section-description text-outline" style="color:white;">Trending deals posted by other users</h3> -->
+      <ul>
+        <li class="text-danger" v-for="error in errors">{{ error }}</li>
+      </ul>
+      <div class="form-group">
+        <label class="text-outline">Email:</label>
+        <input class="text-box" type="email" class="form-control" v-model="email">
+      </div>
+      <div class="form-group">
+        <label class="text-outline">Password:</label>
+        <input class="text-box" type="password" class="form-control" v-model="password">
+      </div>
+      <button class="btn btn-primary" v-on:click="submit()">Submit</button>
     </div>
-    <div class="form-group">
-      <label>Password:</label>
-      <input type="password" class="form-control" v-model="password">
-    </div>
-    <button class="btn btn-primary" v-on:click="submit()">Submit</button>
+    </section>  
   </div>
 </template>
 
@@ -658,16 +694,17 @@
           <div class="section-title-divider"></div>
           <h4 class="section-description">Your current wishlist</h4>
         <div class="col-md-3"  v-for="wishlist in wishlists">
-          <a class="portfolio-item" v-bind:style="'background-image: url(' + wishlist.image + ');'">
+          <a class="portfolio-item" v-bind:style="'background-image: url(' + wishlist.image + ');'" v-bind:href="wishlist.product_link" target="_blank">
             <div class="details">
               <h4>{{wishlist.name}}</h4>
               <p>View Product</p>    
             </div>
           </a>
-          </button>
+          <button v-on:click="removeItem(wishlist.id)">Remove Item</button>
         </div>
       </div>
     </div>
+
   </section>
 </template>
 
@@ -680,7 +717,7 @@
               <div class="section-title-divider"></div>
               <h4 class="section-description">Daily Deals you've posted</h4>
             <div class="col-md-3"  v-for="dailydeal in dailydeals">
-              <a class="portfolio-item" v-bind:style="'background-image: url(' + dailydeal.image + ');'"> 
+              <a class="portfolio-item" v-bind:style="'background-image: url(' + dailydeal.image + ');'" v-bind:href="dailydeal.product_link" target="_blank"> 
                 <div class="details">
                   <h4>{{dailydeal.name}}</h4>
                   <p>View Product</p>    
@@ -696,41 +733,49 @@
 
 <template id="search-results-page">
   <div class="container">
-  <div class="row">
-  <div class="card" style="width: 18rem;" v-for="searchresult in searchResults">
-    <img class="card-img-top" v-bind:src="searchresult.mediumImage" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Name: {{searchresult.name}}</h5>
-      <p class="card-text">Price: ${{searchresult.msrp}}</p>
-      <p class="card-text redSale">Sale Price: ${{searchresult.salePrice}}</p>
+    <div></div>
+    <div class="row">
+      <div class="col-md-4" style="width: 18rem;" v-for="searchresult in searchResults" >
+        <div class="card" >
+          <img class="card-img-top" v-bind:src="searchresult.mediumImage" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{searchresult.name}}</h5>
+            <p class="card-text">Price: ${{searchresult.msrp}}</p>
+            <p class="card-text redSale">Sale Price: ${{searchresult.salePrice}}</p>
 
-      <a v-bind:href="searchresult.productUrl" class="btn btn-primary" target="_blank">View Product</a>
+            <a v-bind:href="searchresult.productUrl" class="btn btn-primary">View Product</a>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  </div>
   </div>
 </template>
 
 <template id="submit-image-page">
+  <section id="services">
+      <div class="container wow fadeInUp">
   <div class="container">
-    <h3 class="section-title">Locate product</h3>
+    <h3 class="section-title text-outline" style="color:white">Locate product</h3>
       <div class="section-title-divider"></div>
-      <h4 class="section-description">Upload image to find your desired product</h4>
+      <h4 class="section-description text-outline">Upload image to find your desired product</h4>
     <ul>
       <li class="text-danger" v-for="error in errors">{{ error }}</li>
     </ul>
     <div class="form-group">
-      <label>Image:</label>
-      <input type="file" v-on:change="uploadFile($event)">
+      <label class="text-outline" style="color:white;">Image:</label>
+      <input class="text-outline" style="color:white;" type="file" v-on:change="uploadFile($event)">
     </div>
 
     <div class="row">
       <div class="col-md-4 service-item" v-for="url in urls">
-        <a v-bind:href="url" class="service-icon" target="_blank"><i class="fa fa-paper-plane"></i></a>
-        <p class="service-description">Click icon to visit website</p>
+      <h4 class="text-outline" style="color:white">Click icons to visit product website</h4>
+        <a v-bind:href="url" class="text-outline service-icon" target="_blank"><i class="fa fa-paper-plane"></i></a>
+        <p class="service-description text-outline" style="color:white;">{{url}}</p>
       </div>
     </div>
   </div>
+</div>
+</section>
 </template>
 
 <!-- <template id="image-result-page">

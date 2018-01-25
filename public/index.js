@@ -27,6 +27,7 @@ var HomePage = {
       axios
         .post("/lists", params)
         .then(function(response) {
+          $("#myModal").modal("hide");
           router.push("/lists");
         })
         .catch(
@@ -218,7 +219,15 @@ var ViewWishListPage = {
       }.bind(this)
     );
   },
-  methods: {},
+
+  methods: {
+    removeItem: function(id) {
+      axios.delete("/lists/" + id).then(function(response) {
+        router.push("/lists");
+        location.reload();
+      });
+    }
+  },
   computed: {}
 };
 
@@ -270,7 +279,7 @@ var SubmitImagePage = {
         axios.post("/images", formData).then(
           function(response) {
             this.urls = response.data;
-            console.log(this.urls);
+            // console.log(this.urls);
             event.target.value = "";
           }.bind(this)
         );
@@ -338,8 +347,16 @@ var app = new Vue({
   data: function() {
     return {
       searchresults: [],
-      search_term: ""
+      search_term: "",
+      reload: function() {
+        this.$router.go(this.$router.currentRoute);
+      }
     };
+  },
+  watch: {
+    $route: function() {
+      window.location.reload();
+    }
   },
   created: function() {
     var jwt = localStorage.getItem("jwt");

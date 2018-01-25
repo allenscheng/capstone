@@ -14,7 +14,7 @@ class DailyDealsController < ApplicationController
 
   def search 
     search_term = params[:search_term]
-    response = Unirest.get("http://api.walmartlabs.com/v1/search?query=#{search_term}&format=json&apiKey=#{ENV["WALMART_API_KEY"]}")
+    response = Unirest.get("http://api.walmartlabs.com/v1/search?query=#{search_term}&numItems=20&format=json&apiKey=#{ENV["WALMART_API_KEY"]}")
     # pp response.body["items"][0]["productUrl"]
     render json: response.body["items"]
   end

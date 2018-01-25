@@ -3,7 +3,7 @@ class WishListsController < ApplicationController
   require "pp"
 
   def index
-    list = WishList.all.order(:id => :asc)
+    list = WishList.all.order(:id => :DESC)
     render json: list.as_json 
   end
 
@@ -36,7 +36,7 @@ class WishListsController < ApplicationController
   end
 
   def destroy
-    list = WishList.find_by(:id, params[:id]) 
+    list = WishList.find_by(id: params["id"]) 
     list.destroy
     render json: {message: "Wishlist item has been removed!"}
   end
