@@ -569,6 +569,59 @@ body.mobile-nav-active #mobile-nav-toggle {
   margin-left: 80px;
   line-height: 24px;
 }
+/*services end*/
+
+#services2 {
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0.3)
+    ),
+    url("../img/white-wallpapers.jpg") fixed center center;
+  background-size: cover;
+  padding: 80px 0 60px 0;
+}
+
+#services2 .service-item {
+  margin-bottom: 20px;
+}
+
+#services2 .service-icon {
+  float: left;
+  background: #03c4eb;
+  padding: 16px;
+  border-radius: 50%;
+  transition: 0.5s;
+  border: 1px solid #03c4eb;
+}
+
+#services2 .service-icon i {
+  color: #fff;
+  font-size: 24px;
+}
+
+#services2 .service-item:hover .service-icon {
+  background: #fff;
+}
+
+#services2 .service-item:hover .service-icon i {
+  color: #03c4eb;
+}
+
+#services2 .service-title {
+  margin-left: 80px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+#services2 .service-title a {
+  color: #111;
+}
+
+#services2 .service-description {
+  margin-left: 80px;
+  line-height: 24px;
+}
 
 /* Subscribe Section
 --------------------------------*/

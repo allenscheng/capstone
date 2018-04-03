@@ -26,12 +26,12 @@ class WishListsController < ApplicationController
   end
 
   def show
-    list = WishList.find_by(:id, params[:id])
+    list = WishList.find_by(id: params[:id])
     render json: list.as_json 
   end
 
   def update
-    list = WishList.find_by(:id, params[:id])
+    list = WishList.find_by(id: params[:id])
     list.product_link = params[:product_link] || list.product_link
   end
 

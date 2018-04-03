@@ -1,0 +1,18 @@
+.redSale {
+  color: red;
+}
+p {
+  width: 20rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-outline {
+  color: white;
+  text-shadow: #000 0px 0px 6px, #000 0px 0px 6px, #000 0px 0px 6px;
+}
+.text-box {
+  width: 80%;
+  border-radius: 5px;
+}

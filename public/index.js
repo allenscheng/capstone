@@ -194,6 +194,7 @@ var CreateWishListPage = {
       axios
         .post("/lists", params)
         .then(function(response) {
+          $("#listModal").modal("hide");
           router.push("/lists");
         })
         .catch(
@@ -245,7 +246,14 @@ var ViewDailyDealPage = {
       }.bind(this)
     );
   },
-  methods: {},
+  methods: {
+    removeItem: function(id) {
+      axios.delete("/deals/" + id).then(function(response) {
+        router.push("/deals");
+        location.reload();
+      });
+    }
+  },
   computed: {}
 };
 
@@ -258,7 +266,24 @@ var SearchPage = {
     };
   },
   created: function() {},
-  methods: {},
+  methods: {
+    addWishlist: function(link) {
+      var params = {
+        product_link: link
+      };
+      axios
+        .post("/lists", params)
+        .then(function(response) {
+          // $("#myModal").modal("hide");
+          router.push("/lists");
+        })
+        .catch(
+          function(error) {
+            this.errors = error.response.data.errors;
+          }.bind(this)
+        );
+    }
+  },
   computed: {}
 };
 
@@ -347,16 +372,8 @@ var app = new Vue({
   data: function() {
     return {
       searchresults: [],
-      search_term: "",
-      reload: function() {
-        this.$router.go(this.$router.currentRoute);
-      }
+      search_term: ""
     };
-  },
-  watch: {
-    $route: function() {
-      window.location.reload();
-    }
   },
   created: function() {
     var jwt = localStorage.getItem("jwt");

@@ -1,7 +1,7 @@
 class DailyDealsController < ApplicationController
 
   def index2 
-    deal = DailyDeal.all.order(:id => :asc)
+    deal = DailyDeal.all.order(:id => :DESC)
     render json: deal.as_json 
   end
 
@@ -53,7 +53,7 @@ class DailyDealsController < ApplicationController
   end
 
   def update
-    deal = Deal.find_by(id: params[:id])
+    deal = DailyDeal.find_by(id: params[:id])
     deal.name = params[:name] || deal.name
     deal.description = params[:description] || deal.description
     deal.msrp = params[:msrp] || deal.msrp 
@@ -68,7 +68,7 @@ class DailyDealsController < ApplicationController
   end
 
   def destroy 
-    deal = Deal.find_by(id: params[:id])
+    deal = DailyDeal.find_by(id: params["id"])
     deal.destroy 
     render json: {message: "The deal has been removed!"}
   end

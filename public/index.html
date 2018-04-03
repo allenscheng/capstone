@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Snap it</title>
+  <title>Where's The Deal</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
@@ -50,26 +50,7 @@
   <script src="https://unpkg.com/axios/dist/axios.js"></script>
   <script src="index.js" defer></script>
   <!-- <script src="./path/to/dropzone.js"></script> -->
-  <style>
-    .redSale {
-      color: red;
-    }
-    p {
-      width: 20rem;
-           white-space: nowrap;
-           overflow: hidden;
-           text-overflow: ellipsis;
-    }
-
-    .text-outline {
-        color: white;
-        text-shadow:#000 0px 0px 6px,   #000 0px 0px 6px,   #000 0px 0px 6px;
-    }
-    .text-box {
-        width: 80%;
-        border-radius: 5px;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 
 <body>
@@ -85,11 +66,10 @@
     <div class="hero-container">
       <div class="wow fadeIn">
         <div class="hero-logo">
-          <img class="" src="img/logo.png" alt="Imperial">
+          <!-- <img class="" src="img/logo.png" alt="Imperial"> -->
         </div>
-
-        <!-- <h1>Welcome to Snap it</h1> -->
-        <h1><span class="rotating">Show trending deals, Find product with an image, Post deals you find</span></h1>
+        <h1>Where's The Deal</h1>
+        <h1  style="font-size:80px"><span class="rotating">Show trending deals, Find product with an image, Post deals you find</span></h1>
         <div class="actions">
           <a href="#about" class="btn-get-started">Get Started</a>
           <a href="#services" class="btn-services">Our Services</a>
@@ -107,12 +87,11 @@
       <div id="logo" class="pull-left">
        <!--  <a href="#hero"><img src="img/logo.png" alt="" title="" /></img></a> -->
         <!-- Uncomment below if you prefer to use a text image -->
-        <h1><a href="#hero">Snap it</a></h1>
+        <h1><a href="#hero"></a></h1>
       </div>
 
       <nav id="nav-menu-container">
         <ul class="nav-menu">
-
           <li class="menu-active"><a href="/#/">Home</a></li>
           <li><a href="/#/wishlist">Create a Wishlist</a></li>
           <li><a href="/#/lists">View Wishlist</a></li>
@@ -134,330 +113,12 @@
                   </div>
             </ul>
           </li>
-
-
         </ul>
       </nav>
       <!-- #nav-menu-container -->
     </div>
   </header>
   <!-- #header -->
-
-  <!--==========================
-  About Section
-  ============================-->
-<!--   <section id="about">
-    <div class="container wow fadeInUp">
-      <div class="row">
-        <div class="col-md-12">
-          <h3 class="section-title">About Us</h3>
-          <div class="section-title-divider"></div>
-          <p class="section-description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam</p>
-        </div>
-      </div>
-    </div>
-    <div class="container about-container wow fadeInUp">
-      <div class="row">
-        <div class="col-md-6 col-md-push-6 about-content">
-          <h2 class="about-title">We provide great services and ideass</h2>
-          <p class="about-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-            in reprehenderit in voluptate
-          </p>
-          <p class="about-text">
-            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
-            id est laborum
-          </p>
-          <p class="about-text">
-            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
-            id est laborum
-          </p>
-        </div>
-      </div>
-    </div>
-  </section> -->
-
-  <!--==========================
-  Services Section
-  ============================-->
-<!--   <section id="services">
-    <div class="container wow fadeInUp">
-      <div class="row">
-        <div class="col-md-12">
-          <h3 class="section-title">Our Services</h3>
-          <div class="section-title-divider"></div>
-          <p class="section-description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-4 service-item">
-          <div class="service-icon"><i class="fa fa-desktop"></i></div>
-          <h4 class="service-title"><a href="">Lorem Ipsum</a></h4>
-          <p class="service-description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-        </div>
-        <div class="col-md-4 service-item">
-          <div class="service-icon"><i class="fa fa-bar-chart"></i></div>
-          <h4 class="service-title"><a href="">Dolor Sitema</a></h4>
-          <p class="service-description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
-        </div>
-        <div class="col-md-4 service-item">
-          <div class="service-icon"><i class="fa fa-paper-plane"></i></div>
-          <h4 class="service-title"><a href="">Sed ut perspiciatis</a></h4>
-          <p class="service-description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-        </div>
-        <div class="col-md-4 service-item">
-          <div class="service-icon"><i class="fa fa-photo"></i></div>
-          <h4 class="service-title"><a href="">Magni Dolores</a></h4>
-          <p class="service-description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-        </div>
-        <div class="col-md-4 service-item">
-          <div class="service-icon"><i class="fa fa-road"></i></div>
-          <h4 class="service-title"><a href="">Nemo Enim</a></h4>
-          <p class="service-description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
-        </div>
-        <div class="col-md-4 service-item">
-          <div class="service-icon"><i class="fa fa-shopping-bag"></i></div>
-          <h4 class="service-title"><a href="">Eiusmod Tempor</a></h4>
-          <p class="service-description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
-        </div>
-      </div>
-    </div>
-  </section>
- -->
-  <!--==========================
-  Subscrbe Section
-  ============================-->
-<!--   <section id="subscribe">
-    <div class="container wow fadeInUp">
-      <div class="row">
-        <div class="col-md-8">
-          <h3 class="subscribe-title">Subscribe For Updates</h3>
-          <p class="subscribe-text">Join our 1000+ subscribers and get access to the latest tools, freebies, product announcements and much more!</p>
-        </div>
-        <div class="col-md-4 subscribe-btn-container">
-          <a class="subscribe-btn" href="#">Subscribe Now</a>
-        </div>
-      </div>
-    </div>
-  </section> -->
-
-  <!--==========================
-  Porfolio Section
-  ============================-->
-<!--   <section id="portfolio">
-    <div class="container wow fadeInUp">
-      <div class="row">
-        <div class="col-md-12">
-          <h3 class="section-title">Portfolio</h3>
-          <div class="section-title-divider"></div>
-          <p class="section-description">Si stante, hoc natura videlicet vult, salvam esse se, quod concedimus ses haec dicturum fuisse</p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-3">
-          <a class="portfolio-item" style="background-image: url(img/portfolio-1.jpg);" href="">
-            <div class="details">
-              <h4>Portfolio 1</h4>
-              <span>Alored dono par</span>
-            </div>
-          </a>
-        </div>
-
-        <div class="col-md-3">
-          <a class="portfolio-item" style="background-image: url(img/portfolio-2.jpg);" href="">
-            <div class="details">
-              <h4>Portfolio 2</h4>
-              <span>Alored dono par</span>
-            </div>
-          </a>
-        </div>
-
-        <div class="col-md-3">
-          <a class="portfolio-item" style="background-image: url(img/portfolio-3.jpg);" href="">
-            <div class="details">
-              <h4>Portfolio 3</h4>
-              <span>Alored dono par</span>
-            </div>
-          </a>
-        </div>
-
-        <div class="col-md-3">
-          <a class="portfolio-item" style="background-image: url(img/portfolio-4.jpg);" href="">
-            <div class="details">
-              <h4>Portfolio 4</h4>
-              <span>Alored dono par</span>
-            </div>
-          </a>
-        </div>
-
-        <div class="col-md-3">
-          <a class="portfolio-item" style="background-image: url(img/portfolio-5.jpg);" href="">
-            <div class="details">
-              <h4>Portfolio 5</h4>
-              <span>Alored dono par</span>
-            </div>
-          </a>
-        </div>
-
-        <div class="col-md-3">
-          <a class="portfolio-item" style="background-image: url(img/portfolio-6.jpg);" href="">
-            <div class="details">
-              <h4>Portfolio 6</h4>
-              <span>Alored dono par</span>
-            </div>
-          </a>
-        </div>
-
-        <div class="col-md-3">
-          <a class="portfolio-item" style="background-image: url(img/portfolio-7.jpg);" href="">
-            <div class="details">
-              <h4>Portfolio 7</h4>
-              <span>Alored dono par</span>
-            </div>
-          </a>
-        </div>
-
-        <div class="col-md-3">
-          <a class="portfolio-item" style="background-image: url(img/portfolio-8.jpg);" href="">
-            <div class="details">
-              <h4>Portfolio 8</h4>
-              <span>Alored dono par</span>
-            </div>
-          </a>
-        </div>
-
-      </div>
-    </div>
-  </section> -->
-
-  <!--==========================
-  Testimonials Section
-  ============================-->
-<!--   <section id="testimonials">
-    <div class="container wow fadeInUp">
-      <div class="row">
-        <div class="col-md-12">
-          <h3 class="section-title">Testimonials</h3>
-          <div class="section-title-divider"></div>
-          <p class="section-description">Erdo lide, nora porodo filece, salvam esse se, quod concedimus ses haec dicturum fuisse</p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-3">
-          <div class="profile">
-            <div class="pic"><img src="img/client-1.jpg" alt=""></div>
-            <h4>Saul Goodman</h4>
-            <span>Lawless Inc</span>
-          </div>
-        </div>
-        <div class="col-md-9">
-          <div class="quote">
-            <b><img src="img/quote_sign_left.png" alt=""></b> Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper. <small><img src="img/quote_sign_right.png" alt=""></small>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-9">
-          <div class="quote">
-            <b><img src="img/quote_sign_left.png" alt=""></b> Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis architecto beatae. <small><img src="img/quote_sign_right.png" alt=""></small>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="profile">
-            <div class="pic"><img src="img/client-2.jpg" alt=""></div>
-            <h4>Sara Wilsson</h4>
-            <span>Odeo Inc</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section> -->
-
-  <!--==========================
-  Team Section
-  ============================-->
-<!--   <section id="team">
-    <div class="container wow fadeInUp">
-      <div class="row">
-        <div class="col-md-12">
-          <h3 class="section-title">Our Team</h3>
-          <div class="section-title-divider"></div>
-          <p class="section-description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-3">
-          <div class="member">
-            <div class="pic"><img src="img/team-1.jpg" alt=""></div>
-            <h4>Walter White</h4>
-            <span>Chief Executive Officer</span>
-            <div class="social">
-              <a href=""><i class="fa fa-twitter"></i></a>
-              <a href=""><i class="fa fa-facebook"></i></a>
-              <a href=""><i class="fa fa-google-plus"></i></a>
-              <a href=""><i class="fa fa-linkedin"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-3">
-          <div class="member">
-            <div class="pic"><img src="img/team-2.jpg" alt=""></div>
-            <h4>Sarah Jhinson</h4>
-            <span>Product Manager</span>
-            <div class="social">
-              <a href=""><i class="fa fa-twitter"></i></a>
-              <a href=""><i class="fa fa-facebook"></i></a>
-              <a href=""><i class="fa fa-google-plus"></i></a>
-              <a href=""><i class="fa fa-linkedin"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-3">
-          <div class="member">
-            <div class="pic"><img src="img/team-3.jpg" alt=""></div>
-            <h4>William Anderson</h4>
-            <span>CTO</span>
-            <div class="social">
-              <a href=""><i class="fa fa-twitter"></i></a>
-              <a href=""><i class="fa fa-facebook"></i></a>
-              <a href=""><i class="fa fa-google-plus"></i></a>
-              <a href=""><i class="fa fa-linkedin"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-3">
-          <div class="member">
-            <div class="pic"><img src="img/team-4.jpg" alt=""></div>
-            <h4>Amanda Jepson</h4>
-            <span>Accountant</span>
-            <div class="social">
-              <a href=""><i class="fa fa-twitter"></i></a>
-              <a href=""><i class="fa fa-facebook"></i></a>
-              <a href=""><i class="fa fa-google-plus"></i></a>
-              <a href=""><i class="fa fa-linkedin"></i></a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
- -->
-  <!--==========================
-  Contact Section
-  ============================-->
-
-
-  
 
   <router-view></router-view>
 
@@ -470,16 +131,9 @@
       <div class="row">
         <div class="col-md-12">
           <div class="copyright">
-            &copy; Copyright <strong>Imperial Theme</strong>. All Rights Reserved
+            &copy; Copyright <strong></strong>. All Rights Reserved
           </div>
           <div class="credits">
-            <!--
-              All the links in the footer should remain intact.
-              You can delete the links only if you purchased the pro version.
-              Licensing information: https://bootstrapmade.com/license/
-              Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Imperial
-            -->
-            Bootstrap Templates by <a href="https://bootstrapmade.com/">BootstrapMade</a>
           </div>
         </div>
       </div>
@@ -519,7 +173,7 @@
     <div class="container wow fadeInUp">
         <h3 class="section-title text-outline">Daily Deals</h3>
           <div class="section-title-divider text-outline"></div>
-          <h3 class="section-description text-outline" style="color:white;">Trending deals posted by other users</h3>
+          <h3 class="section-description text-outline" style="color:white;">Trending deals posted by users</h3>
       <div class="row">
         <div class="col-sm-4" v-for="product in products">
         <div class="card" style="width: 20rem; height: 45rem" >
@@ -539,13 +193,9 @@
         </div>
         </div>
         <div>
-          
-
         </div>
     </div>
-
   </section>
-
 
   <!-- Modal -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -563,9 +213,6 @@
       </div>
     </div>
   </div>
-
-
-
   </div>
 </template>
 
@@ -575,7 +222,6 @@
     <div class="container wow fadeInUp">
         <h3 class="section-title text-outline">Login</h3>
           <div class="section-title-divider text-outline"></div>
-          <!-- <h3 class="section-description text-outline" style="color:white;">Trending deals posted by other users</h3> -->
       <ul>
         <li class="text-danger" v-for="error in errors">{{ error }}</li>
       </ul>
@@ -650,8 +296,11 @@
 </template>
 
 <template id="create-dailydealurl-page">
-  <div class="container">
-    <h1>New Deal</h1>
+  <section id="portfolio"><!-- portfolio is needed to load the card animation -->
+    <div class="container wow fadeInUp">
+      <h2 class="section-title">New Deal</h2>
+        <div class="section-title-divider"></div>
+        <h4 class="section-description">Fill in fields</h4>
     <ul>
       <li class="text-danger" v-for="error in errors">{{ error }}</li>
     </ul>
@@ -669,12 +318,15 @@
     </div>
     <button class="btn btn-primary" v-on:click="submit()">Submit</button>
   </div>
+</section>
 </template>
 
 <template id="create-wishlist-page">
-
-  <div class="container">
-    <h1>New Wishlist Item</h1>
+  <section id="portfolio"><!-- portfolio is needed to load the card animation -->
+    <div class="container wow fadeInUp">
+      <h2 class="section-title">New Wishlist Item</h2>
+        <div class="section-title-divider"></div>
+        <h4 class="section-description">Paste URL below</h4>
     <ul>
       <li class="text-danger" v-for="error in errors">{{ error }}</li>
     </ul>
@@ -682,8 +334,25 @@
       <label>Product Link:</label>
       <input type="text" class="form-control" v-model="productLink">
     </div>
-    <button class="btn btn-primary" v-on:click="submit()">Submit</button>
+    <a class="btn btn-primary" v-on:click="submit()" data-toggle="modal" data-target="#listModal">Submit</a>
   </div>
+
+<div class="modal fade" id="listModal" tabindex="-1" role="dialog" aria-labelledby="listModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Creating wishlist item</h4>
+      </div>
+      <div class="modal-body">
+        <p>Analyzing link...</p>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+</section>
 </template>
 
 <template id="view-wishlist-page">
@@ -700,16 +369,14 @@
               <p>View Product</p>    
             </div>
           </a>
-          <button v-on:click="removeItem(wishlist.id)">Remove Item</button>
+          <button class="btn btn-danger btn-sm" v-on:click="removeItem(wishlist.id)">Remove Item</button>
         </div>
       </div>
     </div>
-
   </section>
 </template>
 
 <template id="view-dailydeal-page">
-  <div class="container">
       <section id="portfolio"><!-- portfolio is needed to load the card animation -->
         <div class="container wow fadeInUp">
           <div class="row">
@@ -723,73 +390,58 @@
                   <p>View Product</p>    
                 </div>
               </a>
-              </button>
+              <button class="btn btn-danger btn-sm" v-on:click="removeItem(dailydeal.id)">Remove Item</button>
             </div>
           </div>
         </div>
       </section>
-  </div>
 </template>
 
 <template id="search-results-page">
-  <div class="container">
-    <div></div>
+  <section id="portfolio"><!-- portfolio is needed to load the card animation -->
+    <div class="container wow fadeInUp">
     <div class="row">
-      <div class="col-md-4" style="width: 18rem;" v-for="searchresult in searchResults" >
-        <div class="card" >
-          <img class="card-img-top" v-bind:src="searchresult.mediumImage" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">{{searchresult.name}}</h5>
-            <p class="card-text">Price: ${{searchresult.msrp}}</p>
-            <p class="card-text redSale">Sale Price: ${{searchresult.salePrice}}</p>
-
-            <a v-bind:href="searchresult.productUrl" class="btn btn-primary">View Product</a>
-          </div>
-        </div>
+      <h3 class="section-title">Search Results</h3>
+        <div class="section-title-divider"></div>
+        <h4 class="section-description"></h4>
+        <div class="col-md-4" v-for="searchresult in searchResults" >
+          <div class="card" style="width: 20rem; height: 45rem">
+            <img class="card-img-top" v-bind:src="searchresult.mediumImage" alt="Card image cap"  height="200" width="200">
+            <ul class="list-group list-group-flush">
+              <p class="list-group-item" style="color:black;">{{searchresult.name}}</p>
+              <li class="list-group-item">Price: ${{searchresult.msrp}}</li>
+              <li class="list-group-item redSale">Sale Price: ${{searchresult.salePrice}}</li>
+            </ul>
+            <a class="btn btn-primary" v-bind:href="searchresult.productUrl" target="_blank">View Item</a>
+            <a class="btn btn-primary" v-on:click="addWishlist(searchresult.productUrl)">Add to wishlist</a>
       </div>
     </div>
   </div>
-</template>
-
-<template id="submit-image-page">
-  <section id="services">
-      <div class="container wow fadeInUp">
-  <div class="container">
-    <h3 class="section-title text-outline" style="color:white">Locate product</h3>
-      <div class="section-title-divider"></div>
-      <h4 class="section-description text-outline">Upload image to find your desired product</h4>
-    <ul>
-      <li class="text-danger" v-for="error in errors">{{ error }}</li>
-    </ul>
-    <div class="form-group">
-      <label class="text-outline" style="color:white;">Image:</label>
-      <input class="text-outline" style="color:white;" type="file" v-on:change="uploadFile($event)">
-    </div>
-
-    <div class="row">
-      <div class="col-md-4 service-item" v-for="url in urls">
-      <h4 class="text-outline" style="color:white">Click icons to visit product website</h4>
-        <a v-bind:href="url" class="text-outline service-icon" target="_blank"><i class="fa fa-paper-plane"></i></a>
-        <p class="service-description text-outline" style="color:white;">{{url}}</p>
-      </div>
-    </div>
-  </div>
-</div>
 </section>
 </template>
 
-<!-- <template id="image-result-page">
-  <section id="services">
-  <div class="container wow fadeInUp">
-        <h3 class="section-title">Image Render Results</h3>
+<template id="submit-image-page">
+  <section id="services2">
+    <div class="container wow fadeInUp">
+      <h3 class="section-title text-outline" style="color:white">Locate product</h3>
         <div class="section-title-divider"></div>
+        <h4 class="section-description text-outline">Upload image to find your desired product</h4>
+      <ul>
+        <li class="text-danger" v-for="error in errors">{{ error }}</li>
+      </ul>
+      <div class="form-group">
+        <label class="text-outline" style="color:white;">Image:</label>
+        <input class="text-outline" style="color:white;" type="file" v-on:change="uploadFile($event)">
+      </div>
 
-    <div class="row">
-      <div class="col-md-4 service-item" v-for="url in urls">
-        <a v-bind:href="url" class="service-icon" target="_blank"><i class="fa fa-paper-plane"></i></a>
-        <p class="service-description">Click icon to visit website</p>
+      <div class="row">
+        <div class="col-md-4 service-item" v-for="url in urls">
+        <h4 class="text-outline" style="color:white">Click icons to visit product website</h4>
+          <a v-bind:href="url" class="text-outline service-icon" target="_blank"><i class="fa fa-paper-plane"></i></a>
+          <p class="service-description text-outline" style="color:white;">{{url}}</p>
+        </div>
       </div>
     </div>
-  </div>
   </section>
-</template> -->
+</template>
+
