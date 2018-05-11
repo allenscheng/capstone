@@ -62,21 +62,7 @@
   <!--==========================
   Hero Section
   ============================-->
-  <section id="hero">
-    <div class="hero-container">
-      <div class="wow fadeIn">
-        <div class="hero-logo">
-          <!-- <img class="" src="img/logo.png" alt="Imperial"> -->
-        </div>
-        <h1>Where's The Deal</h1>
-        <h1  style="font-size:80px"><span class="rotating">Show trending deals, Find product with an image, Post deals you find</span></h1>
-        <div class="actions">
-          <a href="#about" class="btn-get-started">Get Started</a>
-          <a href="#services" class="btn-services">Our Services</a>
-        </div>
-      </div>
-    </div>
-  </section>
+ 
 
   <!--==========================
   Header Section
@@ -169,6 +155,21 @@
 
 <template id="home-page">
   <div class="vue-component">
+    <section id="hero">
+      <div class="hero-container">
+        <div class="wow fadeIn">
+          <div class="hero-logo">
+            <!-- <img class="" src="img/logo.png" alt="Imperial"> -->
+          </div>
+          <h1>Where's The Deal</h1>
+          <h1  style="font-size:80px"><span class="rotating">Show trending deals, Find product with an image, Post deals you find</span></h1>
+          <div class="actions">
+            <a href="#subscribe" class="btn-get-started">Get Started</a>
+            <a href="#services" class="btn-services">Our Services</a>
+          </div>
+        </div>
+      </div>
+    </section>
   <section id="subscribe"><!-- needed for the animation and layout -->
     <div class="container wow fadeInUp">
         <h3 class="section-title text-outline">Daily Deals</h3>
@@ -176,20 +177,20 @@
           <h3 class="section-description text-outline" style="color:white;">Trending deals posted by users</h3>
       <div class="row">
         <div class="col-sm-4" v-for="product in products">
-        <div class="card" style="width: 20rem; height: 45rem" >
-          <img class="card-img-top" v-bind:src="product.image" v-if="product.status_check === false" alt="Card image cap"  height="200" width="200">
-          <img class="card-img-top" v-bind:src="product.mediumImage" v-else alt="Card image cap"  height="200" width="200">
-          <ul class="list-group list-group-flush">
-            <p class="list-group-item" style="color:black;">{{product.name}}</p>
-            <li class="list-group-item">Price: ${{product.msrp}}</li>
-            <li class="list-group-item redSale">Sale Price: ${{product.salePrice}}</li>
-          </ul>
-          <a class="btn btn-primary" v-bind:href="product.product_link" v-if="product.status_check === false" target="_blank">View Item</a>
-          <a class="btn btn-primary" v-bind:href="product.productUrl" v-else target="_blank">View Item</a>
+          <div class="card" style="width: 20rem; height: 45rem" >
+            <img class="card-img-top" v-bind:src="product.image" v-if="product.status_check === false" alt="Card image cap"  height="200" width="200">
+            <img class="card-img-top" v-bind:src="product.mediumImage" v-else alt="Card image cap"  height="200" width="200">
+            <ul class="list-group list-group-flush">
+              <p class="list-group-item" style="color:black;">{{product.name}}</p>
+              <li class="list-group-item">Price: ${{product.msrp}}</li>
+              <li class="list-group-item redSale">Sale Price: ${{product.salePrice}}</li>
+            </ul>
+            <a class="btn btn-primary" v-bind:href="product.product_link" v-if="product.status_check === false" target="_blank">View Item</a>
+            <a class="btn btn-primary" v-bind:href="product.productUrl" v-else target="_blank">View Item</a>
 
-          <a class="btn btn-primary" v-if="product.status_check === false" v-on:click="addWishlist(product.product_link)" data-toggle="modal" data-target="#myModal">Add to wishlist</a>
-          <a class="btn btn-primary" v-else v-on:click="addWishlist(product.productUrl)" data-toggle="modal" data-target="#myModal">Add to wishlist</a>
-        </div>
+            <a class="btn btn-primary" v-if="product.status_check === false" v-on:click="addWishlist(product.product_link)" data-toggle="modal" data-target="#myModal">Add to wishlist</a>
+            <a class="btn btn-primary" v-else v-on:click="addWishlist(product.productUrl)" data-toggle="modal" data-target="#myModal">Add to wishlist</a>
+          </div>
         </div>
         </div>
         <div>
